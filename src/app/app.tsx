@@ -14,7 +14,8 @@ export function App() {
 
   return (
     <div>
-      {HAS_DATA && <Timeline farms={FARMS}></Timeline>
+      {
+        HAS_DATA && <Timeline farms={FARMS}></Timeline>
       }
     </div>
   );

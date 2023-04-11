@@ -23,6 +23,8 @@ export const Timeline = (props: TimelineProps) => {
   }
 
   return (
-    <FarmDisplay farm={props.farms[0]} onClick={updateHandler}></FarmDisplay>
+    <>
+      {props.farms.map(farm => <FarmDisplay farm={farm} onClick={updateHandler}></FarmDisplay>)}
+    </>
   );
 };
