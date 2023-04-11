@@ -3,7 +3,7 @@
 
 import { Timeline } from './timeline';
 import  { useFarmData } from './useFarms.hook';
-
+import { BatchEntry,defaultBatch } from './BatchEntry';
 export function App() {
   const [HAS_DATA, FARMS] = useFarmData("");
   console.log('App Render');
@@ -14,9 +14,8 @@ export function App() {
 
   return (
     <div>
-      {
-        HAS_DATA && <Timeline farms={FARMS}></Timeline>
-      }
+      <BatchEntry farm={FARMS} batch={defaultBatch}/>
+      {HAS_DATA && <Timeline farms={FARMS}></Timeline>}
     </div>
   );
 }
