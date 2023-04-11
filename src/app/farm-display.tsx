@@ -3,7 +3,7 @@ import { Farm } from './Farm';
 
 export interface FarmDisplayProps {
   farm: Farm;
-  onClick: () => void;
+  farmClicked: () => void;
 }
 
 export const FarmDisplay = (props: FarmDisplayProps) => {
@@ -12,10 +12,11 @@ export const FarmDisplay = (props: FarmDisplayProps) => {
   console.log('Farm Component');
 
   function onClicked() {
-    props.onClick();
+    props.farmClicked();
     setState('Clicked');
     console.log('I was clicked');
   }
+
 
   return (
     <h1>
