@@ -13,9 +13,9 @@ import { Batch } from './Batch';
 
 
 export interface BatchEntryProps {
-  farm: Farm[];
-  curves?: string[];
-  houses?: string[];
+  farms: Farm[];
+  curves?: Curve[];
+  houses?: House[];
   batch: Batch;
 }
 export const defaultBatch: Batch = {
@@ -31,21 +31,32 @@ export const defaultBatch: Batch = {
 //make a function to accept the BatchEntryProps and render them in 4 dropdowns, and re-render if the dropdowns change.
 export const BatchEntry = (props: BatchEntryProps) => {
   const [batch, setBatch] = useState<Batch>(props.batch);
+  
     
 
-  const setForm = (event: React.ChangeEvent<HTMLSelectElement>) => { 
-    console.log('setForm');
+  const setFarmVal = (event: React.ChangeEvent<HTMLSelectElement>) => { 
+    console.log('setFarm');
     setBatch({...props.batch, farmId: parseInt(event.target.value)});
   }
 
-  const isSelected = (id: number) => id === props.batch.farmId;
+  const setHouseVal = (event: React.ChangeEvent<HTMLSelectElement>) => { 
+    console.log('setHouse');
+    setBatch({...props.batch, houseId: parseInt(event.target.value)});
+  }
+
     
   return (
     <form> 
       <div>
         <label htmlFor="farm">Farm</label>
-        <select name="farm" id="farmID" onChange={setForm}> 
-          {props.farm.map(farm => <option selected={isSelected(farm.id)} value={farm.name}>{farm.name}</option>)}
+        <select name="farm" id="farmID" value={props.batch.farmId} onChange={setFarmVal}> 
+          {props.farms.map(farm => <option value={farm.id}>{farm.name}</option>)}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="house">House</label>
+        <select name="house" id="houseID" value={props.batch.houseId} onChange={setHouseVal}>
+          {props.houses?.map(house => <option value={house.id}>{house.name}</option>)}
         </select>
       </div>
     </form>

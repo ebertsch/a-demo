@@ -4,8 +4,11 @@
 import { Timeline } from './timeline';
 import  { useFarmData } from './useFarms.hook';
 import { BatchEntry,defaultBatch } from './BatchEntry';
+import { House } from './House';
+import { useHouseData } from './useHouses.hook';
 export function App() {
-  const [HAS_DATA, FARMS] = useFarmData("");
+  const [hasFarms, farms] = useFarmData("");
+  const [hasHouses, houses] = useHouseData("");
   console.log('App Render');
 
   const clicker =() => {
@@ -14,8 +17,8 @@ export function App() {
 
   return (
     <div>
-      <BatchEntry farm={FARMS} batch={defaultBatch}/>
-      {HAS_DATA && <Timeline farms={FARMS}></Timeline>}
+      <BatchEntry houses={houses} farms={farms} batch={defaultBatch}/>
+      {hasFarms && <Timeline farms={farms}></Timeline>}
     </div>
   );
 }
