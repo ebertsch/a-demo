@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Farm } from './Farm';
-import { FarmDisplay } from './farm-display';
+import { Farm } from '../farms/farm';
+import { FarmDisplay } from '../farms/farmDisplay.component';
 
-export interface TimelineProps {
+export interface PlacementTimelineProps {
   farms: Farm[];
   curves?: any[]; // Curve[];
   houses?: any[]; //House[];
@@ -10,10 +10,9 @@ export interface TimelineProps {
   onUpdate?: (id: string) => void;
 }
 
-export const Timeline = (props: TimelineProps) => {
+export const PlacementTimeline = (props: PlacementTimelineProps) => {
   // const [farmName, setState] = useState(props.farm.name);
 
-  console.log('Timeline Component');
 
   function updateHandler() {
     //props.onUpdate('1');

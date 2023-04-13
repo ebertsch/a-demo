@@ -83,10 +83,10 @@
       ]
     }
   ],
-  "batches": [
+  "placementes": [
     {
       "id": 11,
-      "name": "Pablo Batches"
+      "name": "Pablo Placementes"
     },
     {
       "id": 12

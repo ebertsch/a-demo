@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Farm } from './Farm';
+import { Farm } from './farm';
 
 export interface FarmDisplayProps {
   farm: Farm;
@@ -9,12 +9,9 @@ export interface FarmDisplayProps {
 export const FarmDisplay = (props: FarmDisplayProps) => {
   const [farmName, setState] = useState(props.farm.name);
 
-  console.log('Farm Component');
-
   function onClicked() {
     props.farmClicked();
     setState('Clicked');
-    console.log('I was clicked');
   }
 
 

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Farm } from './Farm';
+import { Farm } from './farm';
 
-export function useFarmData(legalEntityId: string) {
+export type FarmHook = [boolean, Farm[]];
+
+export function useFarmData(legalEntityId: string) : FarmHook {
   const [farms, setFarms] = useState<Farm[]>([]);
   const [error, setError] = useState('');
 
@@ -22,5 +24,5 @@ export function useFarmData(legalEntityId: string) {
     getFarms();
   }, []);
 
-  return [!!farms.length, farms] as [boolean, Farm[]];
+  return [!!farms.length, farms];
 }

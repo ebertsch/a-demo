@@ -1,5 +1,5 @@
 
-import { ApolloData } from './Farm';
+import { ApolloData } from '../core';
 
 export interface Point {
     Day: number;

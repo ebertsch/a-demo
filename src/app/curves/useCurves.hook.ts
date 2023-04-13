@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Curve } from './Curve';
+import { Curve } from './curve';
 
-export function useCurveData(legalEntityId: string) {
+export type CurveHook = [boolean, Curve[]];
+
+export function useCurveData(legalEntityId: string) : CurveHook {
   const [Curves, setCurves] = useState<Curve[]>([]);
   const [error, setError] = useState('');
 
@@ -22,5 +24,5 @@ export function useCurveData(legalEntityId: string) {
     getCurves();
   }, []);
 
-  return [!!Curves.length, Curves] as [boolean, Curve[]];
+  return [!!Curves.length, Curves];
 }

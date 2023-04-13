@@ -1,32 +1,29 @@
 /* eslint-disable react/style-prop-object */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-import { Timeline } from './timeline';
-import  { useFarmData } from './useFarms.hook';
-import { BatchEntry,defaultBatch } from './BatchEntry';
-import { House } from './House';
-import { useHouseData } from './useHouses.hook';
-import { useCurveData } from './useCurves.hook';
-import { useBatchData } from './useBatches.hook';
-import { Batch } from './Batch';
+import { PlacementTimeline, PlacementGraph, PlacementEntry, defaultPlacement, usePlacementData, Placement } from './placements';
+import { useHouseData } from './houses';
+import { useCurveData } from './curves';
+import { useFarmData } from './farms';
+import { ContextEntry, useContextData } from './context';
 
 export function App() {
   const [hasFarms, farms] = useFarmData("");
   const [hasHouses, houses] = useHouseData("");
   const [hasCurves, curves] = useCurveData("");
-  const [hasBatches, batches, setBatches] = useBatchData("");
+  const [hasPlacements, placements, setPlacements] = usePlacementData("");
+  const [context, setContext] = useContextData();
 
-  console.log('App Render');
-
-  const saveBatch =(batch: Batch) => {
-    setBatches(batch);
-    console.log(batches, batch);
+  const savePlacement =(placement: Placement) => {
+    setPlacements(placement);
   }
 
   return (
     <div>
-      <BatchEntry houses={houses} farms={farms} curves={curves} batch={defaultBatch} onSave={saveBatch}/>
-      {hasFarms && <Timeline farms={farms}></Timeline>}
+      <PlacementEntry houses={houses} farms={farms} curves={curves} placement={defaultPlacement} onSave={savePlacement}/>
+      {hasFarms && <PlacementTimeline farms={farms}></PlacementTimeline>}
+      <PlacementGraph placements={placements}></PlacementGraph>
+      <ContextEntry context={context}></ContextEntry>
     </div>
   );
 }

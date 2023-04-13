@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { House } from './House';
+import { House } from './house';
 
-export function useHouseData(legalEntityId: string) {
+export type HouseHook = [boolean, House[]];
+
+export function useHouseData(legalEntityId: string) : HouseHook {
   const [houses, setHouses] = useState<House[]>([]);
   const [error, setError] = useState('');
 
@@ -22,5 +24,5 @@ export function useHouseData(legalEntityId: string) {
     getHouses();
   }, []);
 
-  return [!!houses.length, houses] as [boolean, House[]];
+  return [!!houses.length, houses];
 }
