@@ -174,7 +174,7 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
             label="Date/time"
           />
         </div>
-        <div>
+        <div className="button-container">
           <UIButton
             type="button"
             onClick={handleSave}

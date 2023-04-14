@@ -2,3 +2,8 @@
 .form-field {
     margin-bottom: 20px;
   }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
