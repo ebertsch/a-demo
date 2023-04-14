@@ -83,13 +83,13 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
   const handleFarmChange = (farm: Farm|null) => {
     props.placement.farmId = farm?.id || "0";
     setPlacement({ ...props.placement });
-    // setHouseUIState({
-    //   ...houseUIState,
-    //   open: false,
-    //   id: "0",
-    //   value: "Select House",
-    //   options: mapToOptions(getHousesFiltered(props.placement.farmId), "0"),
-    // });
+    setHouseUIState({
+      ...houseUIState,
+      open: false,
+      id: "0",
+      value: "Select House",
+      options: mapToOptions(getHousesFiltered(props.placement.farmId), "0"),
+    });
   };
 
   const handleHouseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,9 +128,7 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
       value: getFormatDateInput(props.placement.placementDate),
     });
   };
-  // const setFarmIsOpen = (open: boolean) => {
-  //   setFarmUIState({ ...farmUIState, open: open });
-  // };
+
   const setHouseIsOpen = (open: boolean) => {
     setHouseUIState({ ...houseUIState, open: open });
   };

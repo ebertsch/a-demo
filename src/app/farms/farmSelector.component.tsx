@@ -49,7 +49,6 @@ export const FarmSelector = (props: FarmSelectorProps) => {
       open={farmUIState.open}
       onClose={() => toggleFarmOpen(false)}
       onOpen={() => toggleFarmOpen(true)}
-    //   onClickOutside={() => toggleFarmOpen(false)}
       onChange={handleFarmChange}
       options={farmUIState.options || []}
     />
