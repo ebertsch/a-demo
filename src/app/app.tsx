@@ -1,6 +1,7 @@
 /* eslint-disable react/style-prop-object */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
+import './app.module.css';
 import { PlacementTimeline, PlacementGraph, PlacementEntry, defaultPlacement, usePlacementData, Placement } from './placements';
 import { useHouseData } from './houses';
 import { useCurveData } from './curves';

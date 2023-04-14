@@ -36,16 +36,46 @@
       "name": "Curve 1",
       "ReferenceType": "Temperature",
       "points": [
-        { "day": 1, "value": 2 },
-        { "day": 5, "value": 5 },
-        { "day": 10, "value": 8 },
-        { "day": 15, "value": 10 },
-        { "day": 20, "value": 12 },
-        { "day": 25, "value": 14 },
-        { "day": 30, "value": 16 },
-        { "day": 35, "value": 10 },
-        { "day": 40, "value": 6 },
-        { "day": 45, "value": 2}
+        {
+          "day": 1,
+          "value": 2
+        },
+        {
+          "day": 5,
+          "value": 5
+        },
+        {
+          "day": 10,
+          "value": 8
+        },
+        {
+          "day": 15,
+          "value": 10
+        },
+        {
+          "day": 20,
+          "value": 12
+        },
+        {
+          "day": 25,
+          "value": 14
+        },
+        {
+          "day": 30,
+          "value": 16
+        },
+        {
+          "day": 35,
+          "value": 10
+        },
+        {
+          "day": 40,
+          "value": 6
+        },
+        {
+          "day": 45,
+          "value": 2
+        }
       ]
     },
     {
@@ -53,16 +83,46 @@
       "name": "Curve 2",
       "ReferenceType": "Temperature",
       "points": [
-        { "day": 1, "value": 2 },
-        { "day": 5, "value": 5 },
-        { "day": 10, "value": 8 },
-        { "day": 15, "value": 10 },
-        { "day": 20, "value": 12 },
-        { "day": 25, "value": 14 },
-        { "day": 30, "value": 16 },
-        { "day": 35, "value": 10 },
-        { "day": 40, "value": 6 },
-        { "day": 45, "value": 2}
+        {
+          "day": 1,
+          "value": 2
+        },
+        {
+          "day": 5,
+          "value": 5
+        },
+        {
+          "day": 10,
+          "value": 8
+        },
+        {
+          "day": 15,
+          "value": 10
+        },
+        {
+          "day": 20,
+          "value": 12
+        },
+        {
+          "day": 25,
+          "value": 14
+        },
+        {
+          "day": 30,
+          "value": 16
+        },
+        {
+          "day": 35,
+          "value": 10
+        },
+        {
+          "day": 40,
+          "value": 6
+        },
+        {
+          "day": 45,
+          "value": 2
+        }
       ]
     },
     {
@@ -70,16 +130,46 @@
       "name": "Curve 3",
       "ReferenceType": "Temperature",
       "points": [
-        { "day": 1, "value": 2 },
-        { "day": 5, "value": 5 },
-        { "day": 10, "value": 8 },
-        { "day": 15, "value": 10 },
-        { "day": 20, "value": 12 },
-        { "day": 25, "value": 14 },
-        { "day": 30, "value": 16 },
-        { "day": 35, "value": 10 },
-        { "day": 40, "value": 6 },
-        { "day": 45, "value": 2}
+        {
+          "day": 1,
+          "value": 2
+        },
+        {
+          "day": 5,
+          "value": 5
+        },
+        {
+          "day": 10,
+          "value": 8
+        },
+        {
+          "day": 15,
+          "value": 10
+        },
+        {
+          "day": 20,
+          "value": 12
+        },
+        {
+          "day": 25,
+          "value": 14
+        },
+        {
+          "day": 30,
+          "value": 16
+        },
+        {
+          "day": 35,
+          "value": 10
+        },
+        {
+          "day": 40,
+          "value": 6
+        },
+        {
+          "day": 45,
+          "value": 2
+        }
       ]
     }
   ],
@@ -113,6 +203,13 @@
       "houseId": 2,
       "curveId": 2,
       "placementDate": "2023-04-27T00:00:00.000Z"
+    },
+    {
+      "id": "0",
+      "farmId": "1",
+      "houseId": "1",
+      "curveId": "2",
+      "placementDate": "2023-04-14T21:53:08.435Z"
     }
   ]
 }

@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { Farm, FarmSelector, mapFarmsToOptions } from "../farms";
-import { House } from "../houses";
-import { Curve } from "../curves";
+import { House,HouseSelector } from "../houses";
+import { Curve, CurveSelector } from "../curves";
 import { Placement } from ".";
-import { UIDateTimePicker, UISelect } from "@apollo/apollo-ui-reactjs";
+import { UIButton, UIDateTimePicker, UISelect } from "@apollo/apollo-ui-reactjs";
 import {
   mapToOptions,
   getFormatDateInput,
@@ -92,31 +92,13 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
     });
   };
 
-  const handleHouseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    props.placement.houseId = event.target.value;
+  const handleHouseChange = (house: House | null) => {
+    props.placement.houseId = house?.id || "0";
     setPlacement({ ...props.placement });
-    setHouseUIState({
-      ...houseUIState,
-      open: false,
-      value:
-        getHouses().find((house) => house.id === props.placement.houseId)
-          ?.name || "Select House",
-      options: mapToOptions(getHousesFiltered(), props.placement.houseId),
-    });
   };
-  const handleCurveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    props.placement.curveId = event.target.value;
+  const handleCurveChange = (curve: Curve | null) => {
+    props.placement.curveId = curve?.id || "0";
     setPlacement({ ...props.placement });
-    setCurveUIState({
-      ...curveUIState,
-      open: false,
-      value:
-        props.curves?.find((curve) => curve.id === props.placement.curveId)
-          ?.name || "Select Curve",
-      options: mapToOptions(props.curves || [], props.placement.curveId),
-    });
   };
   const handlePlacementDateChange = (event: Date) => {
     props.placement.placementDate = new Date(event);
@@ -141,9 +123,8 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
 
   return (
     <>
-      {console.log("Rendering")}
       <form>
-        <div>
+        <div className="form-field">
           <FarmSelector
             farms={props.farms}
             value={placement.farmId}
@@ -154,59 +135,30 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
             }}
           ></FarmSelector>
         </div>
-        <br />
-        <br />
-        <br />
-        {/* <pre>
-          props.placement.farmId: {props.placement.farmId} <br />
-          farmUIState.id: {farmUIState.id} <br />
-          farmUIState.value: {farmUIState.value} <br />
-          farmUIState.open: {farmUIState.open.toString()} <br />
-          farmUIState.options:{" "}
-          {(farmUIState.options||[]).map((option) => option.label).join("")} <br />
-        </pre> */}
-        <br />
-        <br />
-        <br />
-        <div>
-          <UISelect
-            name="house"
-            id="houseID"
-            label={"House"}
-            placeholder={houseUIState.value}
-            open={houseUIState.open}
-            onClose={() => {
-              setHouseIsOpen(false);
+        <div className="form-field">
+        <HouseSelector
+            houses={props?.houses || []}
+            value={placement.houseId}
+            farmId={placement.farmId}
+            open={false}
+            onChange={(house: House | null) => {
+              handleHouseChange(house)
+              console.log(house);
             }}
-            onOpen={() => {
-              setHouseIsOpen(true);
-            }}
-            // onClickOutside={() => setHouseIsOpen(false)}
-            onChange={handleHouseChange}
-            options={houseUIState.options || []}
-          />
+          ></HouseSelector>
         </div>
-        {/* <div>
-          <UISelect
-            name="curve"
-            id="curveID"
-            label={"Curve"}
-            placeholder={curveUIState.value}
-            open={curveUIState.open}
-            onClose={() => {
-              setCurveIsOpen(false);
+        <div className="form-field">
+          <CurveSelector
+            curves={props?.curves || []}
+            value={placement.curveId}
+            open={false}
+            onChange={(curve: Curve | null) => {
+              handleCurveChange(curve)
+              console.log(curve);
             }}
-            onOpen={() => {
-              setCurveIsOpen(true);
-            }}
-            onClickOutside={() => {
-              setCurveIsOpen(false);
-            }}
-            onChange={handleCurveChange}
-            options={(curveUIState.options||[])}
-          />
-        </div> */}
-        <div>
+          ></CurveSelector>
+        </div>
+        <div className="form-field">
           <UIDateTimePicker
             open={placementDateUIState.open}
             locale="en-GB"
@@ -215,24 +167,22 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
             value={placementDateUIState.id}
             displayValue={placementDateUIState.value}
             onChange={handlePlacementDateChange}
-            // onClickOutside={() => setPlacementDateIsOpen(false)}
             onClose={() => setPlacementDateIsOpen(false)}
             onOpen={() => {
               setPlacementDateIsOpen(true);
             }}
             label="Date/time"
           />
-          {/* <label htmlFor="placementDate">Placement Date</label>
-          <input type="date" name="placementDate" id="placementDate" onChange={setPlacementDate} value={getFormatDateInput(placement.placementDate)}/> */}
         </div>
         <div>
-          <button
+          <UIButton
             type="button"
             onClick={handleSave}
             disabled={savePlacementValid(placement)}
+            theme="primary-light"
           >
-            thank you copilot
-          </button>
+            Save
+          </UIButton>
         </div>
       </form>
     </>
