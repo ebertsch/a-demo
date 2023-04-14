@@ -22,7 +22,7 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
   const [placement, setPlacement] = useState<Placement>(props.placement);
   const [farmUIState, setFarmUIState] = useState<UISelectionState>({
     id: props.placement.farmId.toString(),
-    value: props.farms.find(farm => farm.id === props.placement.farmId)?.name || 'Select Farm',
+    value: 'Select Farm',
     options: mapToOptions(props.farms,placement.farmId.toString()),
     open: false,
   });
@@ -32,7 +32,7 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
   const getHousesFiltered = (farmId?:string) => props.houses?.filter(house => house.farmId === farmId)||[];
   const [houseUIState, setHouseUIState] = useState<UISelectionState>({
     id: props.placement.houseId.toString(),
-    value: (props?.houses || []).find(house => house.id === props.placement.houseId)?.name || 'Select House',
+    value: 'Select House',
     options: mapToOptions((getHousesFiltered()),placement.houseId.toString()),
     open: false,
   });
