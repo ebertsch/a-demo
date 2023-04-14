@@ -1,33 +1,33 @@
 {
   "farms": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Farm 1"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Farm 2"
     },
     {
-      "id": 333,
+      "id": "333",
       "name": "Pablo Rules"
     }
   ],
   "houses": [
     {
-      "id": 1,
+      "id": "1",
       "name": "House 1",
-      "farmId": 1
+      "farmId": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "House 2",
-      "farmId": 1
+      "farmId": "1"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "House 3",
-      "farmId": 2
+      "farmId": "2"
     }
   ],
   "curves": [

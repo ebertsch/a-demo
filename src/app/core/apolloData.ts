@@ -1,3 +1,3 @@
 export interface ApolloData {
-    id: number;
+    id: string;
 }

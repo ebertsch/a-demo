@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Farm } from '../farms/farm';
 import { FarmDisplay } from '../farms/farmDisplay.component';
 
