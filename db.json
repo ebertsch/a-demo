@@ -32,7 +32,7 @@
   ],
   "curves": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Curve 1",
       "ReferenceType": "Temperature",
       "points": [
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Curve 2",
       "ReferenceType": "Temperature",
       "points": [
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Curve 3",
       "ReferenceType": "Temperature",
       "points": [

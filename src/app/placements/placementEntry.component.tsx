@@ -6,7 +6,7 @@ import { House } from '../houses';
 import { Curve } from '../curves';
 import { Placement } from '.';
 import { UISelect } from '@apollo/apollo-ui-reactjs';
-import { IOption, mapToOptions, getFormatDateInput, UISelectionState } from '../core';
+import {  mapToOptions, getFormatDateInput, UISelectionState } from '../core';
 export interface PlacementEntryProps {
   farms: Farm[];
   curves?: Curve[];
@@ -14,7 +14,6 @@ export interface PlacementEntryProps {
   placement: Placement;
   onSave?: (placement: Placement) => void;
 }
-
 
 
 //make a function to accept the PlacementEntryProps and render them in 4 dropdowns, and re-render if the dropdowns change.
@@ -26,6 +25,7 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
     options: mapToOptions(props.farms,placement.farmId.toString()),
     open: false,
   });
+  
   const getHouses = () => {
     return (props?.houses || [])
   }
@@ -36,7 +36,12 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
     options: mapToOptions((getHousesFiltered()),placement.houseId.toString()),
     open: false,
   });
-  
+  const [curveUIState, setCurveUIState] = useState<UISelectionState>({
+    id: props.placement.curveId.toString(),
+    value: 'Select Curve',
+    options: mapToOptions((props?.curves || []),placement.curveId.toString()),
+    open: false,
+  });
  const savePlacementValid = (placement:Placement) => {
   
     if(placement.farmId === '0' || placement.houseId === '0' || placement.curveId === '0' || placement.placementDate === undefined) {
@@ -72,12 +77,15 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
       ...farmUIState, 
       open:false, 
       value: props.farms.find(farm => farm.id === props.placement.farmId)?.name || 'Select Farm',
-      options: mapToOptions(props.farms, placement.farmId),
+      id: props.placement.farmId,
+      options: mapToOptions(props.farms, props.placement.farmId),
     });
     setHouseUIState({
       ...houseUIState, 
       open:false,
-      options: mapToOptions(getHousesFiltered(), placement.houseId),
+      id: '0',
+      value: 'Select House',
+      options: mapToOptions(getHousesFiltered(props.placement.farmId), "0"),
     });
   }
 
@@ -89,16 +97,30 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
       ...houseUIState, 
       open:false, 
       value: getHouses().find(house => house.id === props.placement.houseId)?.name || 'Select House',
-      options: mapToOptions(getHousesFiltered(),placement.houseId),
+      options: mapToOptions(getHousesFiltered(),props.placement.houseId),
     });
   }
+  const handleCurveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    props.placement.curveId = event.target.value;
+    setPlacement({...props.placement});
+    setCurveUIState({
+      ...curveUIState, 
+      open:false, 
+      value: props.curves?.find(curve => curve.id === props.placement.curveId)?.name || 'Select Curve',
+      options: mapToOptions(props.curves || [],props.placement.curveId),
+    });
+  }
+
   const setFarmIsOpen = (open: boolean) => {
     setFarmUIState({...farmUIState, open: open});
   }
   const setHouseIsOpen = (open: boolean) => {
     setHouseUIState({...houseUIState, open: open});
   }
-  
+  const setCurveIsOpen = (open: boolean) => {
+    setCurveUIState({...curveUIState, open: open});
+  }
   return (
     <>
       <form> 
@@ -118,6 +140,13 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
         <br />
         <br />
         <br />
+        <pre>
+          props.placement.farmId: {props.placement.farmId} <br />
+          farmUIState.id: {farmUIState.id} <br />
+          farmUIState.value: {farmUIState.value} <br />
+          farmUIState.open: {farmUIState.open.toString()} <br />
+          farmUIState.options: {farmUIState.options.map(option => option.label).join('')} <br />
+        </pre>
         <br />
         <br />
         <br />
@@ -136,19 +165,17 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
 
         </div>
         <div>
-          <label htmlFor="curveID">Curve</label>
-          {/* <UISelect 
+          <UISelect 
             name="curve" 
             id="curveID"
-            open={isOpen}
-            onClose={() => {setIsOpen(false)}}
-            onOpen={() => {setIsOpen(true)}}
-            onChange={setCurveVal} 
-            options={props.curves?.map(curve => ({
-              value: curve.id.toString(), 
-              label: curve.name,
-              selected: curve.id === placement.curveId
-            }))}/> */}
+            label={"Curve"}
+            placeholder={curveUIState.value}
+            open={curveUIState.open}
+            onClose={() => {setCurveIsOpen(false)}}
+            onOpen={() => {setCurveIsOpen(true)}}
+            onClickOutside={() => {setCurveIsOpen(false)}}
+            onChange={handleCurveChange} 
+            options={curveUIState.options}/>
         </div>
         <div>
           <label htmlFor="placementDate">Placement Date</label>
@@ -161,4 +188,4 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
     </>
   );
   
-}
+  }
