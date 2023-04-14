@@ -50,7 +50,7 @@ export function App() {
 
     <UISidePanel
         align="right"
-        title="Add BE"
+        title="Add placement"
         onHide={() => setShowSidePanel(false)}
         show={showSidePanel}
       >
