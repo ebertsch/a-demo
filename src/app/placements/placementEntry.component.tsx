@@ -6,7 +6,7 @@ import { House } from '../houses';
 import { Curve } from '../curves';
 import { Placement } from '.';
 import { UISelect } from '@apollo/apollo-ui-reactjs';
-import { IOption, mapToOptions, getFormatDateInput, UISelectionState } from '../core';
+import {  mapToOptions, getFormatDateInput, UISelectionState } from '../core';
 export interface PlacementEntryProps {
   farms: Farm[];
   curves?: Curve[];
@@ -14,7 +14,6 @@ export interface PlacementEntryProps {
   placement: Placement;
   onSave?: (placement: Placement) => void;
 }
-
 
 
 //make a function to accept the PlacementEntryProps and render them in 4 dropdowns, and re-render if the dropdowns change.
@@ -72,12 +71,15 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
       ...farmUIState, 
       open:false, 
       value: props.farms.find(farm => farm.id === props.placement.farmId)?.name || 'Select Farm',
-      options: mapToOptions(props.farms, placement.farmId),
+      id: props.placement.farmId,
+      options: mapToOptions(props.farms, props.placement.farmId),
     });
     setHouseUIState({
       ...houseUIState, 
       open:false,
-      options: mapToOptions(getHousesFiltered(), placement.houseId),
+      id: '0',
+      value: 'Select House',
+      options: mapToOptions(getHousesFiltered(props.placement.farmId), "0"),
     });
   }
 
@@ -89,7 +91,7 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
       ...houseUIState, 
       open:false, 
       value: getHouses().find(house => house.id === props.placement.houseId)?.name || 'Select House',
-      options: mapToOptions(getHousesFiltered(),placement.houseId),
+      options: mapToOptions(getHousesFiltered(),props.placement.houseId),
     });
   }
   const setFarmIsOpen = (open: boolean) => {
@@ -118,6 +120,13 @@ export const PlacementEntry = (props: PlacementEntryProps) => {
         <br />
         <br />
         <br />
+        <pre>
+          props.placement.farmId: {props.placement.farmId} <br />
+          farmUIState.id: {farmUIState.id} <br />
+          farmUIState.value: {farmUIState.value} <br />
+          farmUIState.open: {farmUIState.open.toString()} <br />
+          farmUIState.options: {farmUIState.options.map(option => option.label).join('')} <br />
+        </pre>
         <br />
         <br />
         <br />

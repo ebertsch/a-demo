@@ -9,8 +9,8 @@ export interface IOption  {
 
 export const mapToOptions = (data: {id: string, name: string}[],id: string) => {
     return data.map(item => ({
-      value: item.id.toString(),
+      value: item.id,
       label: item.name,
-      selected: item.id.toString() === id
+      selected: item.id === id
     }));
   }
